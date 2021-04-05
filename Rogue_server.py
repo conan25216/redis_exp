@@ -37,7 +37,7 @@ def RogueServer(lport):
                 # resp =resp.encode()
 
             conn.send(resp)
-        #elif "exit" in data:
+        elif b"exit" in data:
             break
 
 
